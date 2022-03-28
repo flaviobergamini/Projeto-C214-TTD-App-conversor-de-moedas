@@ -7,14 +7,14 @@ void main() async {
     debugShowCheckedModeBanner: false,
     home: Home(),
     theme: ThemeData(
-        hintColor: Colors.grey,
+        hintColor: Colors.white,
         primaryColor: Colors.white,
         inputDecorationTheme: InputDecorationTheme(
           enabledBorder:
-          OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
           focusedBorder:
-          OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          hintStyle: TextStyle(color: Colors.grey),
+          OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          hintStyle: TextStyle(color: Colors.white),
         ))
   ));
 }
