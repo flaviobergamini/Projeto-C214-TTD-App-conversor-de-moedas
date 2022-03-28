@@ -100,41 +100,41 @@ class _HomeState extends State<Home> {
                                 TextField(
                                   decoration: InputDecoration(
                                       labelText: "Real",
-                                      labelStyle: TextStyle(color: Colors.amber),
+                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                                       border: OutlineInputBorder(),
                                       prefixText: "R\$"
                                   ),
-                                  style: TextStyle(color: Colors.amber, fontSize: 25),
+                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
                                 ),
                                 Divider(),
                                 TextField(
                                   decoration: InputDecoration(
                                       labelText: "Dolar",
-                                      labelStyle: TextStyle(color: Colors.amber),
+                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                                       border: OutlineInputBorder(),
                                       prefixText: "US\$"
                                   ),
-                                  style: TextStyle(color: Colors.amber, fontSize: 25),
+                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
                                 ),
                                 Divider(),
                                 TextField(
                                   decoration: InputDecoration(
                                       labelText: "Euro",
-                                      labelStyle: TextStyle(color: Colors.amber),
+                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                                       border: OutlineInputBorder(),
                                       prefixText: "€"
                                   ),
-                                  style: TextStyle(color: Colors.amber, fontSize: 25),
+                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
                                 ),
                                 Divider(),
                                 TextField(
                                   decoration: InputDecoration(
                                       labelText: "Bitcoin",
-                                      labelStyle: TextStyle(color: Colors.amber),
+                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                                       border: OutlineInputBorder(),
                                       prefixText: "฿"
                                   ),
-                                  style: TextStyle(color: Colors.amber, fontSize: 25),
+                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
                                 )
                               ],
                             ),
