@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
@@ -12,6 +11,20 @@ Future<Map> getDataAPI() async {
   return json.decode(response.body);
 }
 
+Widget textField(String label, String prefixo, TextEditingController textEditingController){
+  return TextField(
+    controller: textEditingController,
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(),
+        prefixText: prefixo
+    ),
+    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+  );
+}
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -20,6 +33,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final realController = TextEditingController();
+  final dolarController = TextEditingController();
+  final euroController = TextEditingController();
+  final bitcoinController = TextEditingController();
+
   double dolar = 0.0;
   double euro = 0.0;
   double bitcoin = 0.0;
@@ -97,45 +115,13 @@ class _HomeState extends State<Home> {
                             padding: EdgeInsets.fromLTRB(17, 17, 17, 17),
                             child: Column(
                               children: <Widget>[
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "Real",
-                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(),
-                                      prefixText: "R\$"
-                                  ),
-                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
-                                ),
+                                textField("Real", "R\$", realController),
                                 Divider(),
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "Dolar",
-                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(),
-                                      prefixText: "US\$"
-                                  ),
-                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
-                                ),
+                                textField("Dolar", "US\$", dolarController),
                                 Divider(),
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "Euro",
-                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(),
-                                      prefixText: "€"
-                                  ),
-                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
-                                ),
+                                textField("Euro", "€", euroController),
                                 Divider(),
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "Bitcoin",
-                                      labelStyle: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(),
-                                      prefixText: "฿"
-                                  ),
-                                  style: TextStyle(color: Colors.orange, fontSize: 25, fontWeight: FontWeight.bold),
-                                )
+                                textField("Bitcoin", "฿", bitcoinController),
                               ],
                             ),
                           ),
@@ -151,5 +137,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
 
 
