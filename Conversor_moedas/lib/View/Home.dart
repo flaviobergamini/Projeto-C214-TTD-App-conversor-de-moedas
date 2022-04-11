@@ -31,27 +31,71 @@ class _HomeState extends State<Home> {
   double ibovespa = 0.0;
   double cdi = 0.0;
   double selic = 0.0;
+
+  // Função para limpar os campos de todos os dados quando estão vazios
+  void _limpaCampos(){
+    realController.text ="";
+    dolarController.text ="";
+    euroController.text = "";
+    bitcoinController.text="";
+  }
+
   // Funções que realizam as conversões
   void _realChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
     double real= double.parse(text);
-    dolarController.text=(real/dolar).toStringAsFixed(2);
-    euroController.text=(real/euro).toStringAsFixed(2);
-    bitcoinController.text=(real/bitcoin).toStringAsFixed(2);
+    if(real>0){
+      dolarController.text=(real/dolar).toStringAsFixed(2);
+      euroController.text=(real/euro).toStringAsFixed(2);
+      bitcoinController.text=(real/bitcoin).toStringAsFixed(2);
+    }
   }
 
   void _dolarChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
     double dolar = double.parse(text);
-    realController.text = (dolar * this.dolar).toStringAsFixed(2);
-    euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+    if(dolar>0){
+      realController.text = (dolar * this.dolar).toStringAsFixed(2);
+      euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+      bitcoinController.text=(dolar*this.dolar/bitcoin).toStringAsFixed(2);
+    }
+
   }
 
   void _euroChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
     double euro = double.parse(text);
-    realController.text = (euro * this.euro).toStringAsFixed(2);
-    dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+    if(euro>0){
+      realController.text = (euro * this.euro).toStringAsFixed(2);
+      dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+      bitcoinController.text=(euro*this.euro/bitcoin).toStringAsFixed(3);
+    }
+
   }
 
   void _bitChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
+    double bitcoin=double.parse(text);
+
+    if(bitcoin>0){
+      realController.text=(bitcoin*this.bitcoin).toStringAsFixed(2);
+      dolarController.text=(bitcoin*this.bitcoin/dolar).toStringAsFixed(2);
+      euroController.text = (bitcoin * this.bitcoin / euro).toStringAsFixed(2);
+    }
+
+
 
   }
 
