@@ -34,10 +34,10 @@ class _HomeState extends State<Home> {
 
   // Função para limpar os campos de todos os dados quando estão vazios
   void _limpaCampos(){
-    realController.text ="";
-    dolarController.text ="";
-    euroController.text = "";
-    bitcoinController.text="";
+    realController.clear();
+    dolarController.clear();
+    euroController.clear();
+    bitcoinController.clear();
   }
 
   // Funções que realizam as conversões
@@ -203,7 +203,7 @@ Widget textField(String label, String prefixo, TextEditingController textEditing
         prefixText: prefixo
     ),
     style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-    keyboardType: TextInputType.numberWithOptions(decimal: true),
+    keyboardType: TextInputType.numberWithOptions(signed: true,decimal: true),
     onChanged:f,
     );
 }
