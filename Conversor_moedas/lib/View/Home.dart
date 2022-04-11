@@ -6,23 +6,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<Map> getDataAPI() async {
-  const apiFinance = "https://api.hgbrasil.com/finance?format=json&key=f6fdaf9a";
+  const apiFinance = "https://api.hgbrasil.com/finance?key=173e0827";
   http.Response response = await http.get(Uri.parse(apiFinance));
   return json.decode(response.body);
-}
-
-Widget textField(String label, String prefixo, TextEditingController textEditingController){
-  return TextField(
-    controller: textEditingController,
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        border: OutlineInputBorder(),
-        prefixText: prefixo
-    ),
-    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-  );
 }
 
 class Home extends StatefulWidget {
@@ -38,12 +24,36 @@ class _HomeState extends State<Home> {
   final euroController = TextEditingController();
   final bitcoinController = TextEditingController();
 
+
   double dolar = 0.0;
   double euro = 0.0;
   double bitcoin = 0.0;
   double ibovespa = 0.0;
   double cdi = 0.0;
   double selic = 0.0;
+  // Funções que realizam as conversões
+  void _realChanged(String text){
+    double real= double.parse(text);
+    dolarController.text=(real/dolar).toStringAsFixed(2);
+    euroController.text=(real/euro).toStringAsFixed(2);
+    bitcoinController.text=(real/bitcoin).toStringAsFixed(2);
+  }
+
+  void _dolarChanged(String text){
+    double dolar = double.parse(text);
+    realController.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+  }
+
+  void _euroChanged(String text){
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+  }
+
+  void _bitChanged(String text){
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +125,13 @@ class _HomeState extends State<Home> {
                             padding: EdgeInsets.fromLTRB(17, 17, 17, 17),
                             child: Column(
                               children: <Widget>[
-                                textField("Real", "R\$", realController),
+                                textField("Real", "R\$", realController,_realChanged),
                                 Divider(),
-                                textField("Dolar", "US\$", dolarController),
+                                textField("Dolar", "US\$", dolarController,_dolarChanged),
                                 Divider(),
-                                textField("Euro", "€", euroController),
+                                textField("Euro", "€", euroController,_euroChanged),
                                 Divider(),
-                                textField("Bitcoin", "฿", bitcoinController),
+                                textField("Bitcoin", "฿", bitcoinController,_bitChanged),
                               ],
                             ),
                           ),
@@ -138,5 +148,18 @@ class _HomeState extends State<Home> {
   }
 }
 
+Widget textField(String label, String prefixo, TextEditingController textEditingController,Function(String)? f){
+  return TextField(
+    controller: textEditingController,
 
-
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(),
+        prefixText: prefixo
+    ),
+    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+    keyboardType: TextInputType.numberWithOptions(decimal: true),
+    onChanged:f,
+    );
+}
