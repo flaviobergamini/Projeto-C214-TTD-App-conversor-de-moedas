@@ -13,13 +13,13 @@ $ git clone https://github.com/flaviobergamini/Projeto-C214-TTD-App-conversor-de
 ```
 
 ### :mortar_board: Autores 
-* **Erick Braun Goecking Martins** - [Erick](https://github.com/ErickBGoecking)
+* **Erick Braun Goecking Martins** - [Erick Braun](https://github.com/ErickBGoecking)
 
-* **Flávio Henrique Madureira Bergamini** - [Flávio](https://github.com/flaviobergamini)
+* **Flávio Henrique Madureira Bergamini** - [Flávio Henrique](https://github.com/flaviobergamini)
 
-* **Gabriel Ilian Fonseca Barboza** - [Gabriel](https://github.com/G-ilian) 
+* **Gabriel Ilian Fonseca Barboza** - [Gabriel Ilian](https://github.com/G-ilian) 
 
-* **Gabriela Almada Paranhos de Melo** - [Gabriela](https://github.com/gabialmada11)
+* **Gabriela Almada Paranhos de Melo** - [Gabriela Almada](https://github.com/gabialmada11)
 
 
 
