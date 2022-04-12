@@ -11,10 +11,10 @@ Future<Map> getDataAPI() async {
   return json.decode(response.body);
 }
 
-Widget textField(String label, String prefixo, TextEditingController textEditingController){
+Widget textField(String label, String prefixo, TextEditingController textEditingController,Function(String)? f){
   return TextField(
     controller: textEditingController,
-    keyboardType: TextInputType.number,
+    
     decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -22,6 +22,8 @@ Widget textField(String label, String prefixo, TextEditingController textEditing
         prefixText: prefixo
     ),
     style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+    keyboardType: TextInputType.numberWithOptions(signed: true,decimal: true),
+    onChanged:f,
   );
 }
 
