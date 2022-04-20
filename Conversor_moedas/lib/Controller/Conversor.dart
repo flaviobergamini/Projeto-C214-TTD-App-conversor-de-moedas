@@ -29,4 +29,35 @@ class Conversor{
     double converted = dolar * v/bitcoin;
     return converted;
   }
+
+  double euroChangedReal(double euro, double v){
+    double converted = euro * v;
+    return converted;
+  }
+
+  double euroChangedDolar(double euro, double v, double dolar){
+    double converted = euro * v/dolar;
+    return converted;
+  }
+
+  double euroChangedBitcoin(double euro, double v, double bitcoin){
+    double converted = euro * v/bitcoin;
+    return converted;
+  }
+
+  double bitChangedReal(double bitcoin, double v){
+    double converted = bitcoin * v;
+    return converted;
+  }
+
+  double bitChangedDolar(double bitcoin, double v, double dolar){
+    double converted = bitcoin * v/dolar;
+    return converted;
+  }
+
+  double bitChangedEuro(double bitcoin, double v, double euro){
+    double converted = bitcoin * v/euro;
+    return converted;
+  }
+
 }

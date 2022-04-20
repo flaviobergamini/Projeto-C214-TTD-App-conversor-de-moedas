@@ -83,10 +83,13 @@ class _HomeState extends State<Home> {
       return;
     }
     double euro = double.parse(text);
+    double euroConvertedR = conversor.euroChangedReal(euro, this.euro);
+    double euroConvertedD = conversor.euroChangedDolar(euro, this.euro, dolar);
+    double euroConvertedB = conversor.euroChangedBitcoin(euro, this.euro, bitcoin);
     if(euro>0){
-      realController.text = (euro * this.euro).toStringAsFixed(2);
-      dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
-      bitcoinController.text=(euro*this.euro/bitcoin).toStringAsFixed(3);
+      realController.text = euroConvertedR.toStringAsFixed(2);
+      dolarController.text = euroConvertedD.toStringAsFixed(2);
+      bitcoinController.text=euroConvertedB.toStringAsFixed(3);
     }
 
   }
@@ -97,11 +100,17 @@ class _HomeState extends State<Home> {
       return;
     }
     double bitcoin=double.parse(text);
+    double bitcoinonvertedR = conversor.bitChangedReal(bitcoin, this.bitcoin);
+    double bitcoinonvertedD = conversor.bitChangedDolar(bitcoin, this.bitcoin, dolar);
+    double bitcoinonvertedE = conversor.bitChangedEuro(bitcoin, this.bitcoin, euro);
 
     if(bitcoin>0){
-      realController.text=(bitcoin*this.bitcoin).toStringAsFixed(2);
-      dolarController.text=(bitcoin*this.bitcoin/dolar).toStringAsFixed(2);
-      euroController.text = (bitcoin * this.bitcoin / euro).toStringAsFixed(2);
+      realController.text=bitcoinonvertedR.toStringAsFixed(2);
+      dolarController.text=bitcoinonvertedD.toStringAsFixed(2);
+      euroController.text = bitcoinonvertedE.toStringAsFixed(2);
+      //realController.text=(bitcoin*this.bitcoin).toStringAsFixed(2);
+      //dolarController.text=(bitcoin*this.bitcoin/dolar).toStringAsFixed(2);
+      //euroController.text = (bitcoin * this.bitcoin / euro).toStringAsFixed(2);
     }
 
 
