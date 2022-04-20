@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:conversor_moedas/Controller/Conversor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
@@ -31,6 +32,7 @@ class _HomeState extends State<Home> {
   double ibovespa = 0.0;
   double cdi = 0.0;
   double selic = 0.0;
+  Conversor conversor = Conversor();
 
   // Função para limpar os campos de todos os dados quando estão vazios
   void _limpaCampos(){
@@ -47,10 +49,14 @@ class _HomeState extends State<Home> {
       return;
     }
     double real= double.parse(text);
+    double realConvertedD = conversor.realChangedDolar(real,dolar);
+    double realConvertedE = conversor.realChangedEuro(real,euro);
+    double realConvertedB = conversor.realChangedBitcoin(real,bitcoin);
     if(real>0){
-      dolarController.text=(real/dolar).toStringAsFixed(2);
-      euroController.text=(real/euro).toStringAsFixed(2);
-      bitcoinController.text=(real/bitcoin).toStringAsFixed(2);
+      
+      dolarController.text= realConvertedD.toStringAsFixed(2);
+      euroController.text=realConvertedE.toStringAsFixed(2);
+      bitcoinController.text=realConvertedB.toStringAsFixed(2);
     }
   }
 
@@ -60,10 +66,13 @@ class _HomeState extends State<Home> {
       return;
     }
     double dolar = double.parse(text);
+    double dolarConvertedR = conversor.dolarChangedReal(dolar, this.dolar);
+    double dolarConvertedE = conversor.dolarChangedEuro(dolar, this.dolar, euro);
+    double dolarConvertedB = conversor.dolarChangedBitcoin(dolar, this.dolar, bitcoin);
     if(dolar>0){
-      realController.text = (dolar * this.dolar).toStringAsFixed(2);
-      euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
-      bitcoinController.text=(dolar*this.dolar/bitcoin).toStringAsFixed(2);
+      realController.text = dolarConvertedR.toStringAsFixed(2);
+      euroController.text = dolarConvertedE.toStringAsFixed(2);
+      bitcoinController.text=dolarConvertedB.toStringAsFixed(2);
     }
 
   }
