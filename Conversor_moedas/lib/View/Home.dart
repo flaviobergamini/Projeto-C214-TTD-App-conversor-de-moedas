@@ -6,7 +6,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<Map> getDataAPI() async {
+Future<Map> getDataAPI() async{
   const apiFinance = "https://api.hgbrasil.com/finance?key=173e0827";
   http.Response response = await http.get(Uri.parse(apiFinance));
   return json.decode(response.body);
