@@ -5,6 +5,8 @@ import 'package:test/test.dart';
 void main(){
   Conversor conversor = Conversor();
 
+  //TESTES EM CASOS ÓTIMOS
+
   test('Valor do Dolar deve ser 0.5, ', (){
     expect(conversor.realChangedDolar(2.00, 4.00), 0.50);
   });
@@ -13,7 +15,48 @@ void main(){
     expect(conversor.realChangedEuro(2.00, 4.00), 0.50);
   });
 
+  test('Valor do Bitcoin deve ser 0.5, ', (){
+    expect(conversor.realChangedBitcoin(2.00, 4.00), 0.50);
+  });
 
+  test('Valor do Real deve ser 8.00, ', (){
+    expect(conversor.dolarChangedReal(2.00, 4.00), 8.00);
+  });
+
+  test('Valor do Euro deve ser 1.75, ', (){
+    expect(conversor.dolarChangedEuro(3.50, 2.00, 4.00), 1.75);
+  });
+
+  test('Valor do Bitcoim deve ser 1.75, ', (){
+    expect(conversor.dolarChangedBitcoin(3.50, 2.00, 4.00), 1.75);
+  });
+
+  test('Valor do Real deve ser 8.00, ', (){
+    expect(conversor.euroChangedReal(2.00, 4.00), 8.00);
+  });
+
+  test('Valor do Dolar deve ser 1.75, ', (){
+    expect(conversor.euroChangedDolar(3.50, 2.00, 4.00), 1.75);
+  });
+
+  test('Valor do Bitcoin deve ser 1.75, ', (){
+    expect(conversor.euroChangedBitcoin(3.50, 2.00, 4.00), 1.75);
+  });
+
+  test('Valor do Real deve ser 8.00, ', (){
+    expect(conversor.bitChangedReal(2.00, 4.00), 8.00);
+  });
+
+  test('Valor do Dolar deve ser 1.75, ', (){
+    expect(conversor.bitChangedDolar(3.50, 2.00, 4.00), 1.75);
+  });
+
+  test('Valor do Euro deve ser 1.75, ', (){
+    expect(conversor.bitChangedEuro(3.50, 2.00, 4.00), 1.75);
+  });
+
+
+  // TESTES EM CASOS NÃO ÓTIMO
 
   test('Erro, valor de Real -> Dolar deve ser -1', (){
     expect(conversor.realChangedDolar(2.00, 0), -1);

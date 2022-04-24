@@ -108,13 +108,7 @@ class _HomeState extends State<Home> {
       realController.text=bitcoinonvertedR.toStringAsFixed(2);
       dolarController.text=bitcoinonvertedD.toStringAsFixed(2);
       euroController.text = bitcoinonvertedE.toStringAsFixed(2);
-      //realController.text=(bitcoin*this.bitcoin).toStringAsFixed(2);
-      //dolarController.text=(bitcoin*this.bitcoin/dolar).toStringAsFixed(2);
-      //euroController.text = (bitcoin * this.bitcoin / euro).toStringAsFixed(2);
     }
-
-
-
   }
 
   @override
