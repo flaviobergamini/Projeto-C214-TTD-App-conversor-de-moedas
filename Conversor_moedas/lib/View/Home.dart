@@ -1,28 +1,15 @@
 import 'dart:ui';
+import 'package:conversor_moedas/Controller/Conversor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<Map> getDataAPI() async {
-  const apiFinance = "https://api.hgbrasil.com/finance?format=json&key=f6fdaf9a";
+Future<Map> getDataAPI() async{
+  const apiFinance = "https://api.hgbrasil.com/finance?key=173e0827";
   http.Response response = await http.get(Uri.parse(apiFinance));
   return json.decode(response.body);
-}
-
-Widget textField(String label, String prefixo, TextEditingController textEditingController){
-  return TextField(
-    controller: textEditingController,
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        border: OutlineInputBorder(),
-        prefixText: prefixo
-    ),
-    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-  );
 }
 
 class Home extends StatefulWidget {
@@ -38,12 +25,91 @@ class _HomeState extends State<Home> {
   final euroController = TextEditingController();
   final bitcoinController = TextEditingController();
 
+
   double dolar = 0.0;
   double euro = 0.0;
   double bitcoin = 0.0;
   double ibovespa = 0.0;
   double cdi = 0.0;
   double selic = 0.0;
+  Conversor conversor = Conversor();
+
+  // Função para limpar os campos de todos os dados quando estão vazios
+  void _limpaCampos(){
+    realController.clear();
+    dolarController.clear();
+    euroController.clear();
+    bitcoinController.clear();
+  }
+
+  // Funções que realizam as conversões
+  void _realChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
+    double real= double.parse(text);
+    double realConvertedD = conversor.realChangedDolar(real,dolar);
+    double realConvertedE = conversor.realChangedEuro(real,euro);
+    double realConvertedB = conversor.realChangedBitcoin(real,bitcoin);
+    if(real>0){
+      
+      dolarController.text= realConvertedD.toStringAsFixed(2);
+      euroController.text=realConvertedE.toStringAsFixed(2);
+      bitcoinController.text=realConvertedB.toStringAsFixed(2);
+    }
+  }
+
+  void _dolarChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
+    double dolar = double.parse(text);
+    double dolarConvertedR = conversor.dolarChangedReal(dolar, this.dolar);
+    double dolarConvertedE = conversor.dolarChangedEuro(dolar, this.dolar, euro);
+    double dolarConvertedB = conversor.dolarChangedBitcoin(dolar, this.dolar, bitcoin);
+    if(dolar>0){
+      realController.text = dolarConvertedR.toStringAsFixed(2);
+      euroController.text = dolarConvertedE.toStringAsFixed(2);
+      bitcoinController.text=dolarConvertedB.toStringAsFixed(2);
+    }
+
+  }
+
+  void _euroChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
+    double euro = double.parse(text);
+    double euroConvertedR = conversor.euroChangedReal(euro, this.euro);
+    double euroConvertedD = conversor.euroChangedDolar(euro, this.euro, dolar);
+    double euroConvertedB = conversor.euroChangedBitcoin(euro, this.euro, bitcoin);
+    if(euro>0){
+      realController.text = euroConvertedR.toStringAsFixed(2);
+      dolarController.text = euroConvertedD.toStringAsFixed(2);
+      bitcoinController.text=euroConvertedB.toStringAsFixed(3);
+    }
+
+  }
+
+  void _bitChanged(String text){
+    if(text.isEmpty){
+      _limpaCampos();
+      return;
+    }
+    double bitcoin=double.parse(text);
+    double bitcoinonvertedR = conversor.bitChangedReal(bitcoin, this.bitcoin);
+    double bitcoinonvertedD = conversor.bitChangedDolar(bitcoin, this.bitcoin, dolar);
+    double bitcoinonvertedE = conversor.bitChangedEuro(bitcoin, this.bitcoin, euro);
+
+    if(bitcoin>0){
+      realController.text=bitcoinonvertedR.toStringAsFixed(2);
+      dolarController.text=bitcoinonvertedD.toStringAsFixed(2);
+      euroController.text = bitcoinonvertedE.toStringAsFixed(2);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +181,13 @@ class _HomeState extends State<Home> {
                             padding: EdgeInsets.fromLTRB(17, 17, 17, 17),
                             child: Column(
                               children: <Widget>[
-                                textField("Real", "R\$", realController),
+                                textField("Real", "R\$", realController,_realChanged),
                                 Divider(),
-                                textField("Dolar", "US\$", dolarController),
+                                textField("Dolar", "US\$", dolarController,_dolarChanged),
                                 Divider(),
-                                textField("Euro", "€", euroController),
+                                textField("Euro", "€", euroController,_euroChanged),
                                 Divider(),
-                                textField("Bitcoin", "฿", bitcoinController),
+                                textField("Bitcoin", "฿", bitcoinController,_bitChanged),
                               ],
                             ),
                           ),
@@ -138,5 +204,18 @@ class _HomeState extends State<Home> {
   }
 }
 
+Widget textField(String label, String prefixo, TextEditingController textEditingController,Function(String)? f){
+  return TextField(
+    controller: textEditingController,
 
-
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(),
+        prefixText: prefixo
+    ),
+    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+    keyboardType: TextInputType.numberWithOptions(signed: true,decimal: true),
+    onChanged:f,
+    );
+}
