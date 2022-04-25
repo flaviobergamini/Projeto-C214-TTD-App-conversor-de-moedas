@@ -7,7 +7,7 @@
 <p> Flutter é um framework cross-platform para se escrever apps Android, iOS, Desktop, Web e rodar com uma performance nativa. A linguagem padrão do Flutter é o Dart. Flutter vem ganhando muito foco ultimamente devido a sua incrível performance e não depender de nada nativo para poder criar Views, pois ele tem seu próprio framework de renderização, e isso é ótimo, porque você não depende de algo específico de cada plataforma.<p>
 
 ### :computer: Começando
-<p>Para obter uma cópia do projeto a fim de operá-lo/testá-lo de sua máquina,clone o repositório em uma pasta na sua máquina:<p>
+Para obter uma cópia do projeto a fim de operá-lo/testá-lo de sua máquina,clone o repositório em uma pasta na sua máquina:
 ```
 $ git clone https://github.com/flaviobergamini/Projeto-C214-TTD-App-conversor-de-moedas.git
 ```
