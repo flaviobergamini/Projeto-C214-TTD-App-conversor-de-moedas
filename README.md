@@ -20,7 +20,7 @@ Agora pra construir o projeto, você faz no terminal o comando:
 $ flutter run
 ```
 Esse comando você vai fazer o build do projeto e também vai carregar em algum lugar (importante estar com o celular conectado na porta USB e com a opção de desenvolvedor habilitado).
-```
+
 Para rodar a parte de teste do projeto, digite:
 ```
 $ flutter test
